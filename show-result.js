@@ -92,7 +92,8 @@ for (var j=0; j<data4json.length; j++){
 
 //save to google sheet
 const scriptURL = "https://script.google.com/macros/s/AKfycbzwghgsiQMVvOhAB9rtax5-ybJ_biq3nyw1K9QX_DsZfpU9rL6X0Fy_7tbdoXJHRJfB/exec?action=addData"
-fetch(scriptURL, { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(data4json)})
+var proxyUrl = "https://cors-anywhere.herokuapp.com/${scriptURL}";
+fetch(proxyUrl, { method: 'POST', headers: {'Content-Type': 'application/json'},body: JSON.stringify(data4json)})
 
 //download JSON file
 jsonData = {"all_data":data4json, "summary_data": summary_data};
