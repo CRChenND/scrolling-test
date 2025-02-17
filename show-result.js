@@ -90,16 +90,31 @@ for (var j=0; j<data4json.length; j++){
     data4csv.push(data4json[j]);
 }
 
-//save to google sheet
-const scriptURL = "https://script.google.com/macros/s/AKfycbzwghgsiQMVvOhAB9rtax5-ybJ_biq3nyw1K9QX_DsZfpU9rL6X0Fy_7tbdoXJHRJfB/exec?action=addData"
+// //save to google sheet
+// const scriptURL = "https://script.google.com/macros/s/AKfycbzwghgsiQMVvOhAB9rtax5-ybJ_biq3nyw1K9QX_DsZfpU9rL6X0Fy_7tbdoXJHRJfB/exec?action=addData"
+// fetch(scriptURL, { 
+//     redirect: "follow",
+//     method: 'POST', 
+//     body: JSON.stringify(data4json),
+//     headers: {
+//         "Content-Type": "text/plain;charset=utf-8",
+//     },
+// })
+
+// Convert JSON data to a URL-encoded string
+const dataString = encodeURIComponent(JSON.stringify(data4json));
+
+// Define the script URL with parameters
+const scriptURL = `https://script.google.com/macros/s/AKfycbzwghgsiQMVvOhAB9rtax5-ybJ_biq3nyw1K9QX_DsZfpU9rL6X0Fy_7tbdoXJHRJfB/exec?action=addData&data=${dataString}`;
+
 fetch(scriptURL, { 
     redirect: "follow",
-    method: 'POST', 
-    body: JSON.stringify(data4json),
-    headers: {
-        "Content-Type": "text/plain;charset=utf-8",
-    },
+    method: 'GET', // Change method to GET
 })
+.then(response => response.json()) // Parse JSON response
+.then(data => console.log("Success:", data))
+.catch(error => console.error("Error:", error));
+
 
 //download JSON file
 jsonData = {"all_data":data4json, "summary_data": summary_data};
