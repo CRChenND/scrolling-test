@@ -107,13 +107,13 @@ const dataString = encodeURIComponent(JSON.stringify(data4json));
 // Define the script URL with parameters
 // const scriptURL = `https://script.google.com/macros/s/AKfycbzwghgsiQMVvOhAB9rtax5-ybJ_biq3nyw1K9QX_DsZfpU9rL6X0Fy_7tbdoXJHRJfB/exec?action=addData&data=${dataString}`;
 
-fetch(scriptURL, { 
-    redirect: "follow",
-    method: 'GET', // Change method to GET
-})
-.then(response => response.json()) // Parse JSON response
-.then(data => console.log("Success:", data))
-.catch(error => console.error("Error:", error));
+// fetch(scriptURL, { 
+//     redirect: "follow",
+//     method: 'GET', // Change method to GET
+// })
+// .then(response => response.json()) // Parse JSON response
+// .then(data => console.log("Success:", data))
+// .catch(error => console.error("Error:", error));
 
 var xmlhttp = new XMLHttpRequest();
 // var theUrl = "https://script.google.com/a/acme.org/macros/s/AKfy***A4B***eo/exec?foo=bar";
