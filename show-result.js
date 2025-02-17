@@ -115,13 +115,21 @@ const dataString = encodeURIComponent(JSON.stringify(data4json));
 // .then(data => console.log("Success:", data))
 // .catch(error => console.error("Error:", error));
 
-var xmlhttp = new XMLHttpRequest();
-// var theUrl = "https://script.google.com/a/acme.org/macros/s/AKfy***A4B***eo/exec?foo=bar";
-const scriptURL = `https://script.google.com/macros/s/AKfycbzwghgsiQMVvOhAB9rtax5-ybJ_biq3nyw1K9QX_DsZfpU9rL6X0Fy_7tbdoXJHRJfB/exec?action=addData&data=${dataString}`;
-xmlhttp.open("GET", scriptURL);
-xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-xmlhttp.send();
+const formData = new FormData();
+formData.append("action", "addData");
+formData.append("data", JSON.stringify(data4json));
 
+try {
+  await fetch(
+    "https://script.google.com/macros/s/AKfycbzwghgsiQMVvOhAB9rtax5-ybJ_biq3nyw1K9QX_DsZfpU9rL6X0Fy_7tbdoXJHRJfB/exec?action=addData",
+    {
+      method: "POST",
+      body: formData,
+    },
+  );
+} catch (error) {
+  console.error(error);
+} 
 
 //download JSON file
 jsonData = {"all_data":data4json, "summary_data": summary_data};
